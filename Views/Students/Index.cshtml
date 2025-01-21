@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EV.Models.Student>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Student list</h2>
+<a href="@Url.Action("Create","Students")" class="btn btn-primary mb-3">Add Student</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Image</td>
+            <td>Name</td>
+            <td>Date Of Birth</td>
+            <td>Mobile No</td>
+            <td>Emrollment</td>
+            <td>Course</td>
+            <td>Module</td>
+            <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><img src="@item.ImageUrl" alt="Alternate Text" width="120" /></td>
+                <td>@item.StudentName</td>
+                <td>@item.Dob.ToString("yyyy-MM-dd")</td>
+                <td>@item.MobileNo</td>
+                <td>@(item.IsEnrolled ? "Enrolled" : "Not Enrolled")</td>
+                <td>@item.Course.CourseName</td>
+                <td>
+                    @foreach (var m in item.Modules)
+                    {
+                        <ul>
+                            <li>
+                                @m.ModuleName - @m.Duration Houre
+                            </li>
+                        </ul>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit","Students")" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete","Students",new {id = item.StudentId})" class="btn btn-danger"
+                       onclick="return confirm('Delete This Student @item.StudentName')"
+                       >Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
