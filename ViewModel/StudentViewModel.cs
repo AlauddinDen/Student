@@ -10,7 +10,7 @@ namespace EV.ViewModel
     public class StudentViewModel
     {
         public int StudentId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Name ReQ")]
         [Display(Name ="Student Name")]
         public string StudentName { get; set; }
         [DataType(DataType.Date)]
@@ -24,6 +24,7 @@ namespace EV.ViewModel
         [Display(Name = "Profile Pictur")]
         public string ImageUrl { get; set; }
         public int CourseId { get; set; }
+        [Required(ErrorMessage = "Course ReQ")]
         [Display(Name = "Course Name")]
         public string CourseName { get; set; }
         public int CourseModuleId { get; set; }
